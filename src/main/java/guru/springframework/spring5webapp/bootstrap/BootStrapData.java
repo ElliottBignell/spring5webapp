@@ -2,12 +2,15 @@ package guru.springframework.spring5webapp.bootstrap;
 
 import guru.springframework.spring5webapp.domain.Author;
 import guru.springframework.spring5webapp.domain.Book;
+import guru.springframework.spring5webapp.domain.Publisher;
 import guru.springframework.spring5webapp.repositories.AuthorRepository;
 import guru.springframework.spring5webapp.repositories.BookRepository;
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.boot.autoconfigure.gson.GsonProperties;
 import org.springframework.stereotype.Component;
 
+/**
+ * Created by jt on 12/23/19.
+ */
 @Component
 public class BootStrapData implements CommandLineRunner {
 
@@ -22,9 +25,8 @@ public class BootStrapData implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
-        Author eric = new Author("Eric","Evans");
-        Book ddd = new Book("Domain-Driven Design", "123123");
-
+        Author eric = new Author("Eric", "Evans");
+        Book ddd = new Book("Domain Driven Design", "123123");
         eric.getBooks().add(ddd);
         ddd.getAuthors().add(eric);
 
@@ -32,15 +34,17 @@ public class BootStrapData implements CommandLineRunner {
         bookRepository.save(ddd);
 
         Author rod = new Author("Rod", "Johnson");
-        Book noEJB = new Book( "J2EE Development without EJB", "3232323232" );
-
+        Book noEJB = new Book("J2EE Development without EJB", "3939459459");
         rod.getBooks().add(noEJB);
         noEJB.getAuthors().add(rod);
 
         authorRepository.save(rod);
         bookRepository.save(noEJB);
 
-        System.out.println( "Started in Bootstrap" );
-        System.out.println("Number of books: " + bookRepository.count() );
+        System.out.println("Started in Bootstrap");
+        System.out.println("Number of Books: " + bookRepository.count());
+
+        Publisher pub = new Publisher( "Kackson-Pollock", "This Street", "Gotham", "New York", "12345" );
+        System.out.println(pub);
     }
 }

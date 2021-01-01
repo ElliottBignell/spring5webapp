@@ -1,8 +1,12 @@
 package guru.springframework.spring5webapp.domain;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * Created by jt on 12/22/19.
+ */
 @Entity
 public class Book {
 
@@ -14,18 +18,16 @@ public class Book {
     private String isbn;
 
     @ManyToMany
-    @JoinTable(name="author_book",
-               joinColumns = @JoinColumn(name="book_id"),
-               inverseJoinColumns=@JoinColumn(name="author_id")
-    )
-    private Set<Author> authors;
+    @JoinTable(name = "author_book", joinColumns = @JoinColumn(name = "book_id"),
+            inverseJoinColumns = @JoinColumn(name = "author_id"))
+    private Set<Author> authors = new HashSet<>();
+
+    public Book() {
+    }
 
     public Book(String title, String isbn) {
         this.title = title;
         this.isbn = isbn;
-    }
-
-    public Book() {
     }
 
     public Long getId() {
@@ -34,14 +36,6 @@ public class Book {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Set<Author> getAuthors() {
-        return authors;
-    }
-
-    public void setAuthors(Set<Author> authors) {
-        this.authors = authors;
     }
 
     public String getTitle() {
@@ -58,6 +52,14 @@ public class Book {
 
     public void setIsbn(String isbn) {
         this.isbn = isbn;
+    }
+
+    public Set<Author> getAuthors() {
+        return authors;
+    }
+
+    public void setAuthors(Set<Author> authors) {
+        this.authors = authors;
     }
 
     @Override
